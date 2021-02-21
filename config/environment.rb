@@ -1,4 +1,4 @@
-# Load the Rails application.
+tail -f log/production.log# Load the Rails application.
 require_relative 'application'
 
 # Initialize the Rails application.
