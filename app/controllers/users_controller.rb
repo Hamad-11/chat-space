@@ -14,4 +14,4 @@ class UsersController < ApplicationController
       format.json
     end
   end
-  
+end
