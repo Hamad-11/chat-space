@@ -1,24 +1,20 @@
-.Chat
-  .RightHeader
-    .RightHeader__group
-      .RightHeader__groupName
-        = @group.name 
-      %ul.RightHeader__memberList
+%main.main-chat
+  .current-group
+    .current-group__info
+      .current-group__name
+        = @group.name
+      %ul.current-group__member-list
         Member：
-        %li.RightHeader__member
-          - @group.users.each do |user|
+        - @group.users.each do |user|
+          %li.current-group__member
             = user.name
-    = link_to edit_group_path(@group),class: "RightHeader__editButton" do
-      Edit
-  .MessageField
+    = link_to 'Edit', edit_group_path(@group), class: 'current-group__edit-btn'
+  %article.messages
     = render @messages
-
-  .Footer
-    = form_with model: [@group, @message], html: {class: "Form"}, local: true do |f|
-      .Form__contents
-        = f.text_field :content, class: 'Form__inputContent', placeholder: 'type a message'
-        = f.label :image, class: 'Form__inputImage' do
-          = icon('far', 'image', class: 'Form__icon')
-          = f.file_field :image, class: 'Hidden'
-      = f.submit 'Send', class: 'Form__submit'
-
+  = form_with model: [@group, @message], html: { class: 'form' }, local: true do |f|
+    .form__fields
+      = f.text_field :content, placeholder: 'type a message', class: 'form__content'
+      = f.label :image, class: 'form__image-label' do
+        = icon 'fas', 'image'
+        = f.file_field :image, class: 'form__image'
+    = f.submit 'Send', class: 'form__submit'
